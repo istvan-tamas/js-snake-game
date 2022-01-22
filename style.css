@@ -1,0 +1,28 @@
+/* Global styles */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+    border: 1px solid #000;
+}
+
+#header-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+#game {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#controls {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
