@@ -1,2 +1,2 @@
 # js-snake-game
-Simple snake game using JavaScript and some HTML canvas magic
+Snake game built in JavaScript the game board is an HTML canvas.
