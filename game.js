@@ -7,10 +7,10 @@ let cnvs = document.querySelector("#gameBoard");
 
 function startInterval(){
     function startGame() {
-        renderGame();
+        generateRandomPickUp();
         setTimeout(function() {
             startGame();
-        }, 500);
+        }, 3000);
     }
     startGame();
 }
@@ -25,27 +25,43 @@ function renderGame(){
 }
 
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
 
 
 // random pickup generation
 
-function generatePickUp(){
-    
-    // set random values for positions
-    let xPos = Math.floor(Math.random() * 400 + 1);
-    let yPos = Math.floor(Math.random() * 400 + 1);
+function generateRandomPickUp(){
     let ctx = cnvs.getContext("2d");
+    // generate a random number between 1-25 (size of the field)
+    let random_xPos = getRandomInt(1,25);
+    let random_yPos = getRandomInt(1,25);
     ctx.beginPath();
-    ctx.arc(xPos, yPos, 5, 0, 2 * Math.PI);
+
+    // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
+    ctx.arc(16 * random_xPos - 3, 16 * random_yPos - 3, 5, 0, 2 * Math.PI);
+    console.log(random_xPos);
+    console.log(random_xPos);
     ctx.stroke();
 
-    console.log(xPos);
-    console.log(yPos);
 }
 
-// testing stuff
 
-generatePickUp();
+function generateFirstPickup(){
+    let start_xPos = 13;
+    let start_yPos = 13;
+    let ctx = cnvs.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(start_xPos, start_yPos, 5, 0, 2 * Math.PI);
+    ctx.stroke();
+
+}
+
+generateFirstPickup();
+
 
 // drawing a game board with grid
 let ctx = cnvs.getContext("2d");
@@ -57,6 +73,7 @@ let bh = 400;
 // Padding
 let p = 5;
 
+// 25x25 grid
 function drawBoard(){
     // horizontal lines
     for (let x = 0; x <= bw; x += 16) {
