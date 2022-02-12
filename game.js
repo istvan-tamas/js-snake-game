@@ -15,9 +15,9 @@ function startInterval(){
 }
 
 // random int generator for positioning
-function getRandomInt(min, max) {
-    let min = Math.ceil(min);
-    let max = Math.floor(max);
+function getRandomInt(min_arg, max_arg) {
+    let min = Math.ceil(min_arg);
+    let max = Math.floor(max_arg);
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
@@ -66,14 +66,14 @@ let p = 5;
 function drawBoard(){
     // horizontal lines
     for (let x = 0; x <= bw; x += 16) {
-        ctx.moveTo(0.20 + x + p, p);
-        ctx.lineTo(0.20 + x + p, bh + p);
+        ctx.moveTo(0.01 + x + p, p);
+        ctx.lineTo(0.01 + x + p, bh + p);
     }
 
     // vertical lines
     for (let x = 0; x <= bh; x += 16) {
-        ctx.moveTo(p, 0.20 + x + p);
-        ctx.lineTo(bw + p, 0.20 + x + p);
+        ctx.moveTo(p, 0.01 + x + p);
+        ctx.lineTo(bw + p, 0.01 + x + p);
     }
     ctx.strokeStyle = "black";
     ctx.stroke();
