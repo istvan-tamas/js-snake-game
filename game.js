@@ -3,13 +3,13 @@ document.querySelector("#start").addEventListener("click", startInterval);
 
 let cnvs = document.querySelector("#gameBoard"); 
 
-// start the game engine with 3 sec tick
+// start the game engine with 5 sec tick
 function startInterval(){
     function startGame() {
         generateRandomPickUp();
         setTimeout(function() {
             startGame();
-        }, 3000);
+        }, 5000);
     }
     startGame();
 }
@@ -38,18 +38,26 @@ function generateRandomPickUp(){
 
 }
 
-// TODO -> randomize first pickup
-function generateFirstPickup(){
-    let start_xPos = 13;
-    let start_yPos = 13;
+// TODO figure out player movement
+// the player starts at the center
+function playerStart(){
+    // place the player in the center
+    let start_xPos = 8 * 25;
+    let start_yPos = 8 * 25;
     let ctx = cnvs.getContext("2d");
     ctx.beginPath();
-    ctx.arc(start_xPos, start_yPos, 5, 0, 2 * Math.PI);
+    // 10x10 square fits into one space of the grid
+    ctx.rect(start_xPos, start_yPos, 10,10);
     ctx.stroke();
 
 }
 
-generateFirstPickup();
+playerStart();
+
+
+// player movement
+
+
 
 
 // drawing a game board with grid
