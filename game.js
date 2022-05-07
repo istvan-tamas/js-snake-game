@@ -1,17 +1,22 @@
-// Event listeners for the controls
-document.querySelector("#start").addEventListener("click", startInterval);
+// variable setup for the game
+let cnvs = document.querySelector("#gameBoard");
+let playerStartPos_x = 8 * 25;
+let playerStartPos_y = 8 * 25;
+const player = "";
 
-let cnvs = document.querySelector("#gameBoard"); 
+
+// Event listeners for the controls
+document.querySelector("#start").addEventListener("click", startGame);
+//document.querySelector("#restart").addEventListener("click", restartGame);
+//document.querySelector("#pause").addEventListener("click", pauseGame);
+//document.querySelector("#resume").addEventListener("click", resumeGame);
+
 
 // start the game engine with 5 sec tick
-function startInterval(){
-    function startGame() {
+function startGame(){
+        setInterval(function() {movePlayer();}, 1000);
+        
         generateRandomPickUp();
-        setTimeout(function() {
-            startGame();
-        }, 5000);
-    }
-    startGame();
 }
 
 // random int generator for positioning
@@ -32,22 +37,29 @@ function generateRandomPickUp(){
 
     // to place random powerup add multiples of 16 (1 box is 16x16 pixels - 3 pixels to center)
     ctx.arc(16 * random_xPos - 3, 16 * random_yPos - 3, 5, 0, 2 * Math.PI);
-    console.log(random_xPos);
-    console.log(random_xPos);
     ctx.stroke();
 
 }
 
 // TODO figure out player movement
-// the player starts at the center
-function playerStart(){
-    // place the player in the center
-    let start_xPos = 8 * 25;
-    let start_yPos = 8 * 25;
+function movePlayer(){
     let ctx = cnvs.getContext("2d");
     ctx.beginPath();
     // 10x10 square fits into one space of the grid
-    ctx.rect(start_xPos, start_yPos, 10,10);
+    playerStartPos_x -= 0;
+    playerStartPos_y -= 16;
+    ctx.rect(playerStartPos_x, playerStartPos_y, 10,10);
+    ctx.stroke();
+
+}
+
+
+// the player starts at the center
+function playerStart(){
+    let ctx = cnvs.getContext("2d");
+    ctx.beginPath();
+    // 10x10 square fits into one space of the grid
+    ctx.rect(playerStartPos_x, playerStartPos_y, 10,10);
     ctx.stroke();
 
 }
