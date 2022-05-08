@@ -4,7 +4,15 @@ let playerStartPos_x = 8 * 25;
 let playerStartPos_y = 8 * 25;
 let bh = 400;
 let bw = 400;
-let player = "";
+let player = cnvs.getContext("2d");
+let playerDirection = "DOWN";
+let playerSize = 3;
+
+// direction of movement
+let dx = 0;
+let dy = -16;
+
+
 
 // Event listeners for the controls
 document.querySelector("#start").addEventListener("click", startGame);
@@ -15,7 +23,7 @@ document.querySelector("#start").addEventListener("click", startGame);
 
 // start the game engine with 5 sec tick
 function startGame(){
-        setInterval(function() {movePlayer();}, 1000);
+        setInterval(function() {movePlayer();}, 500);
         //setInterval(function() {generateRandomPickUp()},5000);
 }
 
@@ -41,29 +49,27 @@ function generateRandomPickUp(){
 
 }
 
-// the player starts at the center
-function playerStart(){
-    player = cnvs.getContext("2d");
-    player.beginPath();
-    // 10x10 square fits into one space of the grid
-    player.rect(playerStartPos_x, playerStartPos_y, 10,10);
-    player.stroke();
-    player.closePath();
-}
-
-playerStart();
-
-
 // TODO figure out player movement
 function movePlayer(){
+
     player.clearRect(0, 0, bw, bh);
     player.beginPath();
-    player.rect(playerStartPos_x, playerStartPos_y, 10,10);
+    player.rect(playerStartPos_x, playerStartPos_y, 10,playerSize * 10);
+    player.stroke();
     player.closePath();
-    console.log(playerStartPos_x);
-    console.log(playerStartPos_y);
-    playerStartPos_x -= 0;
-    playerStartPos_y -= -16;
+  
    // player.transform(0, 0, 0, 0, playerStartPos_x, playerStartPos_y);
+   if (playerStartPos_y >= 300) {
+        player.clearRect(0, 0, bw, bh);
+        player.beginPath();
+        player.rect(playerStartPos_x, playerStartPos_y, playerSize*10,10);
+        player.stroke();
+        player.closePath();
+        dy = 0;
+        dx = 16;
+        
+   }
+    playerStartPos_x -= dx;
+    playerStartPos_y -= dy;
 }
 
