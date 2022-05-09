@@ -4,11 +4,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas {
+#gameBoard {
     border: 1px solid #000;
     background-color: #b2dfdb;
     margin-bottom: 1em;
+    width: 900px;
     filter: drop-shadow(1px 3px 4px #000000);
+    display: flex;
+    margin: 2em auto;
 }
 
 #header-card {
@@ -37,4 +40,12 @@ a {
 
 footer {
     margin: 1em 0;
+}
+
+.square {
+    width: 30px;
+    height: 30px;
+    background-color: #D3D3D3;
+    border: 1px solid #FFF;
+    display: flex;
 }
