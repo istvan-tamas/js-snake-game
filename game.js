@@ -12,7 +12,8 @@ let player = {
     length : 6,
     moveSpeed : 10,
     x : _startX,
-    y : _startY
+    y : _startY,
+    direction : 1
 }
 
 // Event listeners for the controls
@@ -24,6 +25,7 @@ function startGame(){
 
 
 function movePlayer(){
+    checkDirection();
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
     ctx.beginPath();
     ctx.rect(player.x,player.y,player.length * 10,10);
@@ -41,6 +43,14 @@ function movePlayer(){
 
 // game controls
 document.addEventListener("keydown", key);
+
+function checkDirection(){
+    
+}
+    
+
+}
+
 
 function key(e){
     if(e.key === "ArrowUp"){
