@@ -3,26 +3,47 @@ let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
 
 // starting point for the player
-const _startX = cnvs.clientWidth / 2;
-const _startY = cnvs.clientHeight / 2;
+let _startX = cnvs.width / 2;
+let _startY = cnvs.height / 2;
 
 // setting up the player
 let player = {
     score : 0,
-    length : 6
+    length : 6,
+    moveSpeed : 10,
+    x : _startX,
+    y : _startY
 }
-
-
-
-ctx.beginPath();
-ctx.rect(_startX,_startY,player.length * 10,10);
-ctx.stroke();
-
-
 
 // Event listeners for the controls
 document.querySelector("#start").addEventListener("click", startGame);
 
 function startGame(){
-    console.log("Game started");
+    playerMove = setInterval(movePlayer, 250);
+}
+
+
+function movePlayer(){
+    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+    ctx.beginPath();
+    ctx.rect(player.x,player.y,player.length * 10,10);
+    ctx.stroke();
+    ctx.closePath();
+    // moving to the right
+    player.x += player.moveSpeed;
+
+    // check if snake touches the edge
+    if(player.x + player.length * 10 >= cnvs.width){
+        clearInterval(playerMove);
+    }
+
+}
+
+// game controls
+document.addEventListener("keydown", key);
+
+function key(e){
+    if(e.key === "ArrowUp"){
+        console.log("Up Arrow");
+    }
 }
