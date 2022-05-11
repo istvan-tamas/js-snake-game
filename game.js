@@ -13,7 +13,7 @@ let player = {
     moveSpeed : 10,
     x : _startX,
     y : _startY,
-    direction : 1
+    direction : "UP"
 }
 
 // Event listeners for the controls
@@ -43,21 +43,29 @@ function movePlayer(){
 
 // game controls
 document.addEventListener("keydown", changeDirection);
+function checkDirection(){
+    if (player.direction === "UP") {
+        player.y += player.moveSpeed;
+
+    }
+
+}
+
 
 
 // controls
 function changeDirection(e){
     if(e.key === "ArrowUp"){
-        console.log("UP");
+        player.direction = "UP";
     }
     else if(e.key === "ArrowDown"){
-        console.log("DOWN");
+        player.direction = "DOWN";
     }
     else if(e.key === "ArrowRight"){
-        console.log("RIGHT");
+        player.direction = "RIGHT";
     }
     else if(e.key === "ArrowLeft"){
-        console.log("LEFT");
+        player.direction = "LEFT";
     }
 }
 
