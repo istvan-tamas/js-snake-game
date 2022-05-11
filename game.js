@@ -25,7 +25,7 @@ function startGame(){
 
 
 function movePlayer(){
-    checkDirection();
+
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
     ctx.beginPath();
     ctx.rect(player.x,player.y,player.length * 10,10);
@@ -42,18 +42,22 @@ function movePlayer(){
 }
 
 // game controls
-document.addEventListener("keydown", key);
-
-function checkDirection(){
-    
-}
-    
-
-}
+document.addEventListener("keydown", changeDirection);
 
 
-function key(e){
+// controls
+function changeDirection(e){
     if(e.key === "ArrowUp"){
-        console.log("Up Arrow");
+        console.log("UP");
+    }
+    else if(e.key === "ArrowDown"){
+        console.log("DOWN");
+    }
+    else if(e.key === "ArrowRight"){
+        console.log("RIGHT");
+    }
+    else if(e.key === "ArrowLeft"){
+        console.log("LEFT");
     }
 }
+
