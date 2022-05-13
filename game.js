@@ -9,7 +9,7 @@ let _startY = cnvs.height / 2;
 // setting up the player
 let player = {
     score : 0,
-    length : 6,
+    length : 4,
     moveSpeed : 10,
     x : _startX,
     y : _startY,
@@ -78,23 +78,25 @@ function changeDirection(e){
     }
 }
 
-
-for (let index = 0; index < player.length; index++) {
-    ctx.beginPath();
-    ctx.rect(player.x + index * 10,player.y,10,10);
-    ctx.stroke();
-    ctx.closePath();
-}
   
 
 function drawPlayer(){
-    if (player.direction === "UP") {
+    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+    if (player.direction === "UP" || player.direction === "DOWN") {
     for (let index = 0; index < player.length; index++) {  
-            ctx.clearRect(0, 0, cnvs.width, cnvs.height);
             ctx.beginPath();
-            ctx.rect(player.x,player.y,10,10);
+            ctx.rect(player.x,player.y,10,10 + index * 10);
             ctx.stroke();
             ctx.closePath();
         }
     }
+    if (player.direction === "RIGHT" || player.direction === "LEFT") {
+    for (let index = 0; index < player.length; index++) {  
+            ctx.beginPath();
+            ctx.rect(player.x,player.y,10 + index * 10,10);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
 }
