@@ -25,15 +25,12 @@ function startGame(){
 
 
 function movePlayer(){
-
+    checkDirection();
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
     ctx.beginPath();
     ctx.rect(player.x,player.y,player.length * 10,10);
     ctx.stroke();
     ctx.closePath();
-    // moving to the right
-    player.x += player.moveSpeed;
-
     // check if snake touches the edge
     if(player.x + player.length * 10 >= cnvs.width){
         clearInterval(playerMove);
@@ -45,8 +42,20 @@ function movePlayer(){
 document.addEventListener("keydown", changeDirection);
 function checkDirection(){
     if (player.direction === "UP") {
+        player.y -= player.moveSpeed;
+        player.x -= 0;
+    }
+    if (player.direction === "DOWN") {
         player.y += player.moveSpeed;
-
+        player.x +=0;
+    }
+    if (player.direction === "RIGHT") {
+        player.x += player.moveSpeed;
+        player.y += 0; 
+    }
+    if (player.direction === "LEFT") {
+        player.x -= player.moveSpeed;
+        player.y +=0;
     }
 
 }
