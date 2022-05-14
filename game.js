@@ -20,21 +20,26 @@ let player = {
 document.querySelector("#start").addEventListener("click", startGame);
 
 function startGame(){
-    playerMove = setInterval(movePlayer, 250);
+    //playerMove = setInterval(movePlayer, 250);
+    playerRedraw = setInterval(playerDraw,250);
+}
+
+
+
+function playerDraw(){
+    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+    ctx.beginPath();
+    ctx.rect(player.x + player.moveSpeed,player.y,10,10);
+    ctx.stroke();
+    ctx.closePath();
+    player.moveSpeed += 10;
+
 }
 
 
 function movePlayer(){
     checkDirection();
     drawPlayer();
-
-
-    //ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-    //ctx.beginPath();
-    //ctx.rect(player.x,player.y,player.length * 10,10);
-    //ctx.stroke();
-    //ctx.closePath();
-    // check if snake touches the edge
     if(player.x + player.length * 10 >= cnvs.width){
         clearInterval(playerMove);
     }
@@ -82,10 +87,18 @@ function changeDirection(e){
 
 function drawPlayer(){
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-    if (player.direction === "UP" || player.direction === "DOWN") {
+    if (player.direction === "UP") {
     for (let index = 0; index < player.length; index++) {  
             ctx.beginPath();
-            ctx.rect(player.x,player.y,10,10 + index * 10);
+            ctx.rect(player.x,player.y + 16 ,10,10 + index * 10);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+    if (player.direction === "DOWN") {
+    for (let index = 0; index < player.length; index++) {  
+            ctx.beginPath();
+            ctx.rect(player.x,player.y - 16 ,10,10 + index * 10);
             ctx.stroke();
             ctx.closePath();
         }
