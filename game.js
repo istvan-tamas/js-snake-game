@@ -21,18 +21,45 @@ document.querySelector("#start").addEventListener("click", startGame);
 
 function startGame(){
     //playerMove = setInterval(movePlayer, 250);
-    playerRedraw = setInterval(playerDraw,250);
+    playerRedraw = setInterval(playerDraw,400);
 }
 
 
 
 function playerDraw(){
-    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-    ctx.beginPath();
-    ctx.rect(player.x + player.moveSpeed,player.y,10,10);
-    ctx.stroke();
-    ctx.closePath();
-    player.moveSpeed += 10;
+    if (player.direction === "UP") {
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+        ctx.beginPath();
+        ctx.rect(player.x,player.y - 16,10,10);
+        ctx.stroke();
+        ctx.closePath();
+        player.y -= 16;
+    }
+    if (player.direction === "DOWN") {
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+        ctx.beginPath();
+        ctx.rect(player.x,player.y + 16 ,10,10);
+        ctx.stroke();
+        ctx.closePath();
+        player.y += 16;
+    }
+    if (player.direction === "RIGHT") {
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+        ctx.beginPath();
+        ctx.rect(player.x + 16,player.y,10,10);
+        ctx.stroke();
+        ctx.closePath();
+        player.x += 16;
+    }
+        if (player.direction === "LEFT") {
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+        ctx.beginPath();
+        ctx.rect(player.x - 16,player.y,10,10);
+        ctx.stroke();
+        ctx.closePath();
+        player.x -= 16;
+    }
+ 
 
 }
 
