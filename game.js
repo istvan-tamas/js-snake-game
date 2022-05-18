@@ -16,9 +16,14 @@ let player = {
     direction : "UP"
 }
 
-let snake_coords = [{x:0, y:0}, {x:0, y:10}, {x:0, y:20}, {x:0, y:30}]
-console.log(snake_coords[0].y);
 
+// snake set-up
+let snake_coords = []
+for (let index = 0; index < player.length; index++) {
+    snake_coords.push({x:_startX + index * 10, y:_startY});
+}
+
+// after setting up the initial coordinates drawing the snake
 function drawSnakePart(snakePart) {  
     ctx.fillStyle = 'lightgreen';  
     ctx.strokestyle = 'darkgreen';
