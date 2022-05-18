@@ -16,6 +16,23 @@ let player = {
     direction : "UP"
 }
 
+let snake_coords = [{x:0, y:0}, {x:0, y:10}, {x:0, y:20}, {x:0, y:30}]
+console.log(snake_coords[0].y);
+
+function drawSnakePart(snakePart) {  
+    ctx.fillStyle = 'lightgreen';  
+    ctx.strokestyle = 'darkgreen';
+    ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+}
+
+function drawSnake() { 
+    snake_coords.forEach(drawSnakePart);
+}
+
+drawSnake();
+
+
 // Event listeners for the controls
 document.querySelector("#start").addEventListener("click", startGame);
 
@@ -24,13 +41,11 @@ function startGame(){
     playerRedraw = setInterval(playerDraw,400);
 }
 
-
-
 function playerDraw(){
     if (player.direction === "UP") {
         ctx.clearRect(0, 0, cnvs.width, cnvs.height);
         ctx.beginPath();
-        ctx.rect(player.x,player.y - 16,10,10);
+        ctx.rect(player.x,player.y - 16,10,10*player.length);
         ctx.stroke();
         ctx.closePath();
         player.y -= 16;
