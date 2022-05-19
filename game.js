@@ -1,12 +1,14 @@
-// variable setup for the game
+// variable setup for the game board
 let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
 
 // starting point for the player
+// TO DO refactor?
 let _startX = cnvs.width / 2;
 let _startY = cnvs.height / 2;
 
 // setting up the player
+// TODO is this needed?
 let player = {
     score : 0,
     length : 4,
@@ -17,13 +19,16 @@ let player = {
 }
 
 
-// snake set-up
-let snake_coords = []
-for (let index = 0; index < player.length; index++) {
-    snake_coords.push({x:_startX + index * 10, y:_startY});
-}
+// snake startpoint set-up
+// maybe a for loop is not needed
 
-// after setting up the initial coordinates drawing the snake
+let snake_coords = [{x:_startX + 10, y:_startY + 10},{x:_startX + 10, y:_startY},{x:_startX + 20, y:_startY},{x:_startX + 30, y:_startY}]
+
+//for (let index = 0; index < player.length; index++) {
+//    snake_coords.push({x:_startX + index * 10, y:_startY});
+//}
+
+// after setting up the initial coordinates drawing the snake in the middle of the board
 function drawSnakePart(snakePart) {  
     ctx.fillStyle = 'lightgreen';  
     ctx.strokestyle = 'darkgreen';
