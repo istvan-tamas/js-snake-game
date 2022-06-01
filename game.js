@@ -1,6 +1,8 @@
 // variable setup for the game board
 let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
+let dx = 10;
+let dy = -10;
 
 // starting point for the player
 // TO DO refactor?
@@ -22,15 +24,14 @@ let player = {
 // snake startpoint set-up
 // maybe a for loop is not needed
 
-let snake_coords = [{x:_startX, y:_startY},{x:_startX, y:_startY + 10},{x:_startX, y:_startY + 20},{x:_startX, y:_startY + 30}];
+let snake = [{x:_startX, y:_startY},{x:_startX - 10, y:_startY},{x:_startX - 20, y:_startY},{x:_startX - 30, y:_startY}];
 //for (let index = 0; index < player.length; index++) {
 //    snake_coords.push({x:_startX + index * 10, y:_startY});
 //}
 
 // after setting up the initial coordinates drawing the snake in the middle of the board
 function drawSnakePart(snakePart) { 
-    ctx.fillStyle = 'lightgreen';  
-    ctx.strokestyle = 'darkgreen';
+    ctx.fillStyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 
@@ -39,24 +40,25 @@ function drawSnakePart(snakePart) {
 
 function drawSnake() { 
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-    snake_coords.forEach(drawSnakePart);
-    if (player.direction === "UP") {
-        for (let i = 0; i < snake_coords.length; i++) {
-            snake_coords[i].y -= 10;
-        } 
-    }
-
-    if (player.direction === "LEFT") {
-        snake_coords[0].x -= 10;
-        snake_coords[1].y -= 10;
-    }
-
+    snake.forEach(drawSnakePart);
 }
-// setInterval(drawSnake,1000);
 
 
 
+function advanceSnake(){
+    const head = {
+        x:snake[0].x, y: snake[0].y + dy
+    };
+    snake.unshift(head);
+    snake.pop();
+}
 
+function clearCanvas(){
+     ctx.fillStyle = "white";
+     ctx.strokeStyle = "black";
+}
+
+setTimeout(function onTick(){clearCanvas(); advanceSnake(); drawSnake();},100);
 // Event listeners for the controls
 document.querySelector("#start").addEventListener("click", startGame);
 
