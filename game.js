@@ -1,41 +1,28 @@
 // variable setup for the game board
 let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
+
+//starting transformations
 let dx = 10;
-let dy = -10;
+let dy = 0;
 
 // starting point for the player
-// TO DO refactor?
-let _startX = cnvs.width / 2;
-let _startY = cnvs.height / 2;
-
-// setting up the player
-// TODO is this needed?
-let player = {
-    score : 0,
-    length : 4,
-    moveSpeed : 10,
-    x : _startX,
-    y : _startY,
-    direction : "UP"
-}
-
+let startX = cnvs.width / 2;
+let startY = cnvs.height / 2;
 
 // snake startpoint set-up
-// maybe a for loop is not needed
+let snake = [{x:startX, y:startY},{x:startX - 10, y:startY},{x:startX - 20, y:startY},{x:startX - 30, y:startY}];
 
-let snake = [{x:_startX, y:_startY},{x:_startX - 10, y:_startY},{x:_startX - 20, y:_startY},{x:_startX - 30, y:_startY}];
-//for (let index = 0; index < player.length; index++) {
-//    snake_coords.push({x:_startX + index * 10, y:_startY});
-//}
 
 // after setting up the initial coordinates drawing the snake in the middle of the board
 function drawSnakePart(snakePart) { 
     ctx.fillStyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    // after drawing, updateing the snake part coordinates
+    snakePart.x += dx;
+    snakePart.y += dy;
 
-    
 }
 
 function drawSnake() { 
@@ -43,102 +30,21 @@ function drawSnake() {
     snake.forEach(drawSnakePart);
 }
 
-
-
-function advanceSnake(){
+function changeSnake(){
     const head = {
-        x:snake[0].x, y: snake[0].y + dy
+        x:snake[0].x + dx, y: snake[0].y + dy
     };
     snake.unshift(head);
     snake.pop();
 }
 
-function clearCanvas(){
-     ctx.fillStyle = "white";
-     ctx.strokeStyle = "black";
-}
-
-setTimeout(function onTick(){clearCanvas(); advanceSnake(); drawSnake();},100);
-// Event listeners for the controls
-document.querySelector("#start").addEventListener("click", startGame);
-
-function startGame(){
-    //playerMove = setInterval(movePlayer, 250);
-    playerRedraw = setInterval(playerDraw,400);
-}
-
-function playerDraw(){
-    if (player.direction === "UP") {
-        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-        ctx.beginPath();
-        ctx.rect(player.x,player.y - 16,10,10*player.length);
-        ctx.stroke();
-        ctx.closePath();
-        player.y -= 16;
-    }
-    if (player.direction === "DOWN") {
-        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-        ctx.beginPath();
-        ctx.rect(player.x,player.y + 16 ,10,10);
-        ctx.stroke();
-        ctx.closePath();
-        player.y += 16;
-    }
-    if (player.direction === "RIGHT") {
-        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-        ctx.beginPath();
-        ctx.rect(player.x + 16,player.y,10,10);
-        ctx.stroke();
-        ctx.closePath();
-        player.x += 16;
-    }
-        if (player.direction === "LEFT") {
-        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-        ctx.beginPath();
-        ctx.rect(player.x - 16,player.y,10,10);
-        ctx.stroke();
-        ctx.closePath();
-        player.x -= 16;
-    }
- 
-
-}
-
-
-function movePlayer(){
-    checkDirection();
-    drawPlayer();
-    if(player.x + player.length * 10 >= cnvs.width){
-        clearInterval(playerMove);
-    }
-
-}
-
 // game controls
 document.addEventListener("keydown", changeDirection);
-function checkDirection(){
-    if (player.direction === "UP") {
-        player.y -= player.moveSpeed;
-        player.x -= 0;
-    }
-    if (player.direction === "DOWN") {
-        player.y += player.moveSpeed;
-        player.x +=0;
-    }
-    if (player.direction === "RIGHT") {
-        player.x += player.moveSpeed;
-        player.y += 0; 
-    }
-    if (player.direction === "LEFT") {
-        player.x -= player.moveSpeed;
-        player.y +=0;
-    }
-}
 
-// controls
 function changeDirection(e){
     if(e.key === "ArrowUp"){
-        player.direction = "UP";
+        dy = -10;
+        dx = 0;
     }
     else if(e.key === "ArrowDown"){
         player.direction = "DOWN";
@@ -151,33 +57,11 @@ function changeDirection(e){
     }
 }
 
-  
+// Event listeners for the buttons
+document.querySelector("#start").addEventListener("click", startGame);
 
-function drawPlayer(){
-    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-    if (player.direction === "UP") {
-    for (let index = 0; index < player.length; index++) {  
-            ctx.beginPath();
-            ctx.rect(player.x,player.y + 16 ,10,10 + index * 10);
-            ctx.stroke();
-            ctx.closePath();
-        }
-    }
-    if (player.direction === "DOWN") {
-    for (let index = 0; index < player.length; index++) {  
-            ctx.beginPath();
-            ctx.rect(player.x,player.y - 16 ,10,10 + index * 10);
-            ctx.stroke();
-            ctx.closePath();
-        }
-    }
-    if (player.direction === "RIGHT" || player.direction === "LEFT") {
-    for (let index = 0; index < player.length; index++) {  
-            ctx.beginPath();
-            ctx.rect(player.x,player.y,10 + index * 10,10);
-            ctx.stroke();
-            ctx.closePath();
-        }
-    }
 
+function startGame(){
+    console.log("game started");
+    setInterval(function game(){drawSnake();changeSnake();},500);
 }
