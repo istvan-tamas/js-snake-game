@@ -19,10 +19,6 @@ function drawSnakePart(snakePart) {
     ctx.fillStyle = 'white';
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
-    // after drawing, updateing the snake part coordinates
-    snakePart.x += dx;
-    snakePart.y += dy;
-
 }
 
 function drawSnake() { 
@@ -60,11 +56,22 @@ function changeDirection(e){
     }
 }
 
+// collision testing
+function edgeTest(){
+    if(snake[0].x >= cnvs.width){
+        clearInterval(game);
+        alert("You loose!");
+    }
+}
+
+
 // Event listeners for the buttons
 document.querySelector("#start").addEventListener("click", startGame);
 
 
 function startGame(){
     console.log("game started");
-    setInterval(function game(){drawSnake();changeSnake();},500);
+    game = setInterval(function game(){drawSnake();changeSnake();edgeTest();},200);
 }
+
+console.log(cnvs.width);
