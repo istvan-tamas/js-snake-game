@@ -58,12 +58,41 @@ function changeDirection(e){
 
 // collision testing
 function edgeTest(){
-    if(snake[0].x >= cnvs.width){
+    if(snake[0].x >= cnvs.width + 10){
         clearInterval(game);
-        alert("You loose!");
+        alert("Game Over!");
+    }else if(snake[0].x <= 0 - 20){
+        clearInterval(game);
+        alert("Game Over!");
+    }else if(snake[0].y <= 0 - 20){
+        clearInterval(game);
+        alert("Game Over!");
+    }
+    else if(snake[0].y >= cnvs.height + 10){
+        clearInterval(game);
+        alert("Game Over!");
     }
 }
 
+// random number generator for food pickup
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+// generating food
+
+function generateRandomfood(){
+    // generate a random number between 1-25 (size of the field)
+    let random_xPos = getRandomInt(1,25);
+    let random_yPos = getRandomInt(1,25);
+    ctx.beginPath();
+    // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
+    ctx.arc(16 * random_xPos - 3, 16 * random_yPos - 3, 3, 0, 2 * Math.PI);
+    ctx.stroke();
+}
 
 // Event listeners for the buttons
 document.querySelector("#start").addEventListener("click", startGame);
@@ -72,6 +101,5 @@ document.querySelector("#start").addEventListener("click", startGame);
 function startGame(){
     console.log("game started");
     game = setInterval(function game(){drawSnake();changeSnake();edgeTest();},200);
+    food = setInterval(function food(){generateRandomfood();},1000);
 }
-
-console.log(cnvs.width);
