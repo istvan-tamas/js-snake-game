@@ -47,13 +47,16 @@ function changeDirection(e){
         dx = 0;
     }
     else if(e.key === "ArrowDown"){
-        player.direction = "DOWN";
+        dy = 10;
+        dx = 0;
     }
     else if(e.key === "ArrowRight"){
-        player.direction = "RIGHT";
+        dy = 0;
+        dx = 10;
     }
     else if(e.key === "ArrowLeft"){
-        player.direction = "LEFT";
+        dy = 0;
+        dx = -10;
     }
 }
 
