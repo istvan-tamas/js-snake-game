@@ -10,6 +10,10 @@ let dy = 0;
 let startX = cnvs.width / 2;
 let startY = cnvs.height / 2;
 
+let food = true;
+let foodX;
+let foodY;
+
 // snake startpoint set-up
 let snake = [{x:startX, y:startY},{x:startX - 10, y:startY},{x:startX - 20, y:startY},{x:startX - 30, y:startY}];
 
@@ -24,6 +28,21 @@ function drawSnakePart(snakePart) {
 function drawSnake() { 
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
     snake.forEach(drawSnakePart);
+    // draw food
+    if(food) {
+        // generate a random number between 1-25 (size of the field)
+        foodX = getRandomInt(1,25);
+        foodY = getRandomInt(1,25);
+        food = false;
+    }
+    if (foodX * 15 === snake[0].x && foodY * 15 === snake[0].y) {
+        food = true;
+    }
+    ctx.beginPath();
+    // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
+    ctx.arc(15 * foodX, 15 * foodY, 4, 0, 2 * Math.PI);
+    ctx.stroke();
+
 }
 
 function changeSnake(){
@@ -60,16 +79,20 @@ function changeDirection(e){
 function edgeTest(){
     if(snake[0].x >= cnvs.width + 10){
         clearInterval(game);
+        clearInterval(food);
         alert("Game Over!");
     }else if(snake[0].x <= 0 - 20){
         clearInterval(game);
+        clearInterval(food);
         alert("Game Over!");
     }else if(snake[0].y <= 0 - 20){
         clearInterval(game);
+        clearInterval(food);
         alert("Game Over!");
     }
     else if(snake[0].y >= cnvs.height + 10){
         clearInterval(game);
+        clearInterval(food);
         alert("Game Over!");
     }
 }
@@ -85,13 +108,7 @@ function getRandomInt(min, max) {
 // generating food
 
 function generateRandomfood(){
-    // generate a random number between 1-25 (size of the field)
-    let random_xPos = getRandomInt(1,25);
-    let random_yPos = getRandomInt(1,25);
-    ctx.beginPath();
-    // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
-    ctx.arc(16 * random_xPos - 3, 16 * random_yPos - 3, 3, 0, 2 * Math.PI);
-    ctx.stroke();
+
 }
 
 // Event listeners for the buttons
@@ -102,4 +119,7 @@ function startGame(){
     console.log("game started");
     game = setInterval(function game(){drawSnake();changeSnake();edgeTest();},200);
     food = setInterval(function food(){generateRandomfood();},1000);
+    console.log(foodX, foodY);
 }
+
+
