@@ -31,16 +31,16 @@ function drawSnake() {
     // draw food
     if(food) {
         // generate a random number between 1-25 (size of the field)
-        foodX = getRandomInt(1,25);
-        foodY = getRandomInt(1,25);
+        foodX = getRandomInt(1,39);
+        foodY = getRandomInt(1,39);
         food = false;
     }
-    if (foodX * 15 === snake[0].x && foodY * 15 === snake[0].y) {
+    if (foodX * 10 === snake[0].x && foodY * 10 === snake[0].y) {
         food = true;
     }
     ctx.beginPath();
     // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
-    ctx.arc(15 * foodX, 15 * foodY, 4, 0, 2 * Math.PI);
+    ctx.arc(foodX * 12, foodY * 12,4, 0, 2 * Math.PI);
     ctx.stroke();
 
 }
@@ -119,7 +119,4 @@ function startGame(){
     console.log("game started");
     game = setInterval(function game(){drawSnake();changeSnake();edgeTest();},200);
     food = setInterval(function food(){generateRandomfood();},1000);
-    console.log(foodX, foodY);
 }
-
-
