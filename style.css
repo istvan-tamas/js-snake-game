@@ -6,7 +6,7 @@
 
 #gameBoard {
     border: 1px solid #000;
-    background-color: #b2dfdb;
+    background-color: #ACC8E5;
     filter: drop-shadow(1px 3px 4px #000000);
     margin: 2em auto;
     display: flex;

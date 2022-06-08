@@ -2,6 +2,14 @@
 let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
 
+// Box width
+let bw = 400;
+// Box height
+let bh = 400;
+// Padding
+let p = 0;
+
+
 //starting transformations
 let dx = 10;
 let dy = 0;
@@ -20,7 +28,7 @@ let snake = [{x:startX, y:startY},{x:startX - 10, y:startY},{x:startX - 20, y:st
 
 // after setting up the initial coordinates drawing the snake in the middle of the board
 function drawSnakePart(snakePart) { 
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#112A46';
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
@@ -77,7 +85,7 @@ function changeDirection(e){
 
 // collision testing
 function edgeTest(){
-    if(snake[0].x >= cnvs.width + 10){
+    if(snake[0].x === cnvs.width + 10){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
@@ -85,12 +93,12 @@ function edgeTest(){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
-    }else if(snake[0].y <= 0 - 20){
+    }else if(snake[0].y == 0 ){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
     }
-    else if(snake[0].y >= cnvs.height + 10){
+    else if(snake[0].y == cnvs.height){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
@@ -111,15 +119,30 @@ function generateRandomfood(){
 
 }
 
+function drawBoard(){
+    for (var x = 0; x <= bw; x += 10) {
+        ctx.moveTo(0.20 + x + p, p);
+        ctx.lineTo(0.20 + x + p, bh + p);
+    }
+
+    for (var x = 0; x <= bh; x += 10) {
+        ctx.moveTo(p, 0.20 + x + p);
+        ctx.lineTo(bw + p, 0.20 + x + p);
+    }
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.stroke();
+}
+
 // Event listeners for the buttons
 document.querySelector("#start").addEventListener("click", startGame);
 
 
 function startGame(){
     console.log("game started");
-    game = setInterval(function game(){drawSnake();changeSnake();edgeTest();},100);
+    game = setInterval(function game(){drawSnake();changeSnake();edgeTest();drawBoard()},100);
     food = setInterval(function food(){generateRandomfood();},1000);
 }
 
 
+drawBoard();
 
