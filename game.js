@@ -30,21 +30,19 @@ function drawSnake() {
     snake.forEach(drawSnakePart);
     // draw food
     if(food) {
-        foodX = (getRandomInt(1,4) * getRandomInt(1,10) * 10) - 10;
-        foodY = (getRandomInt(1,4) * getRandomInt(1,10) * 10) - 10;
+        foodX = (getRandomInt(1,4) * getRandomInt(1,10) * 10);
+        foodY = (getRandomInt(1,4) * getRandomInt(1,10) * 10);
         food = false;
     }
     if (foodX === snake[0].x && foodY === snake[0].y) {
         snake.push({x:10, y:10});
         food = true;
     }
+    ctx.fillStyle = 'red';
     ctx.beginPath();
-    // to place random powerup add multiples of 16 (1 box is 16x16 pixels)
-    ctx.arc(foodX,foodY,3, 0, 2 * Math.PI);
+    ctx.fillRect(foodX, foodY, 10, 10);
+    ctx.strokeRect(foodX, foodY, 10, 10);
     ctx.stroke();
-    console.log(foodX, foodY);
-
-
 }
 
 function changeSnake(){
