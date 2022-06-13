@@ -2,6 +2,9 @@
 let cnvs = document.querySelector("#gameBoard");
 let ctx = cnvs.getContext("2d");
 
+let scoreHandle = document.querySelector("#score");
+let score = 0;
+
 // Box width
 let bw = 400;
 // Box height
@@ -34,15 +37,16 @@ function drawSnake() {
         food = false;
     }
     if (foodX === snake[0].x && foodY === snake[0].y) {
+        score += 1;
         snake.push({x:10, y:10});
         food = true;
+        scoreHandle.innerHTML = score;
     }
     ctx.fillStyle = 'red';
     ctx.beginPath();
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
     ctx.stroke();
-    console.log(snake[0].x);
 }
 
 function changeSnake(){
@@ -64,6 +68,7 @@ function drawSnakePart(snakePart) {
 document.addEventListener("keydown", changeDirection);
 
 function changeDirection(e){
+    e.preventDefault();
     if(e.key === "ArrowUp"){
         dy = -10;
         dx = 0;
@@ -97,7 +102,7 @@ function edgeTest(){
         clearInterval(food);
         alert("Game Over!");
     }
-    else if(snake[0].y == cnvs.height){
+    else if(snake[0].y > cnvs.height - 10){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
@@ -139,7 +144,7 @@ document.querySelector("#start").addEventListener("click", startGame);
 
 function startGame(){
     console.log("game started");
-    game = setInterval(function game(){drawSnake();changeSnake();edgeTest();drawBoard()},100);
+    game = setInterval(function game(){edgeTest();drawSnake();changeSnake();drawBoard()},100);
     food = setInterval(function food(){generateRandomfood();},1000);
 }
 
