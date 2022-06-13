@@ -9,7 +9,6 @@ let bh = 400;
 // Padding
 let p = 0;
 
-
 //starting transformations
 let dx = 10;
 let dy = 0;
@@ -25,21 +24,13 @@ let foodY;
 // snake startpoint set-up
 let snake = [{x:startX, y:startY},{x:startX - 10, y:startY},{x:startX - 20, y:startY},{x:startX - 30, y:startY}];
 
-
-// after setting up the initial coordinates drawing the snake in the middle of the board
-function drawSnakePart(snakePart) { 
-    ctx.fillStyle = '#112A46';
-    ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
-    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
-}
-
 function drawSnake() { 
     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
     snake.forEach(drawSnakePart);
     // draw food
     if(food) {
-        foodX = (getRandomInt(1,4) * getRandomInt(1,10) * 10);
-        foodY = (getRandomInt(1,4) * getRandomInt(1,10) * 10);
+        foodX = (getRandomInt(1,4) * getRandomInt(1,10) * 10) - 10;
+        foodY = (getRandomInt(1,4) * getRandomInt(1,10) * 10) - 10;
         food = false;
     }
     if (foodX === snake[0].x && foodY === snake[0].y) {
@@ -51,6 +42,7 @@ function drawSnake() {
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
     ctx.stroke();
+    console.log(snake[0].x);
 }
 
 function changeSnake(){
@@ -59,6 +51,13 @@ function changeSnake(){
     };
     snake.unshift(head);
     snake.pop();
+}
+
+// after setting up the initial coordinates drawing the snake in the middle of the board
+function drawSnakePart(snakePart) { 
+    ctx.fillStyle = '#112A46';
+    ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+    ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
 // game controls
@@ -85,11 +84,11 @@ function changeDirection(e){
 
 // collision testing
 function edgeTest(){
-    if(snake[0].x === cnvs.width + 10){
+    if(snake[0].x > cnvs.width){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
-    }else if(snake[0].x <= 0 - 20){
+    }else if(snake[0].x < -10){
         clearInterval(game);
         clearInterval(food);
         alert("Game Over!");
@@ -119,6 +118,7 @@ function generateRandomfood(){
 
 }
 
+// creating the grid
 function drawBoard(){
     for (var x = 0; x <= bw; x += 10) {
         ctx.moveTo(0.20 + x + p, p);
@@ -146,3 +146,5 @@ function startGame(){
 
 drawBoard();
 
+console.log(cnvs.width);
+console.log(cnvs.height);
