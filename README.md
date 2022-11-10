@@ -1,2 +1,2 @@
 # js-snake-game
-Snake game built in JavaScript the game board is an HTML canvas.
+Snake game built with JavaScript and HTML5 canvas.
