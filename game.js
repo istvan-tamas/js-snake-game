@@ -140,21 +140,37 @@ function drawBoard() {
 
 // Event listeners for the buttons
 document.querySelector('#start').addEventListener('click', startGame);
+document.querySelector('#pause').addEventListener('click', pauseGame);
+document.querySelector('#resume').addEventListener('click', resumeGame);
+
+let paused = false;
 
 function startGame() {
-	console.log('game started');
 	game = setInterval(function game() {
-		edgeTest();
-		drawSnake();
-		changeSnake();
-		drawBoard();
+		if (!paused) {
+			edgeTest();
+			drawSnake();
+			changeSnake();
+			drawBoard();
+		}
 	}, 100);
-	food = setInterval(function food() {
-		generateRandomfood();
-	}, 1000);
+	if (!paused) {
+		food = setInterval(function food() {
+			generateRandomfood();
+		}, 1000);
+	}
+}
+
+// pausing the game
+function pauseGame() {
+	paused = true;
+	console.log('paused');
+}
+
+// resuming the game
+function resumeGame() {
+	paused = false;
+	console.log('paused');
 }
 
 drawBoard();
-
-console.log(cnvs.width);
-console.log(cnvs.height);
