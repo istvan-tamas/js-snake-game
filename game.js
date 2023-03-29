@@ -9,8 +9,6 @@ let score = 0;
 let bw = 400;
 // Box height
 let bh = 400;
-// Padding
-let p = 0;
 
 //starting transformations
 let dx = 10;
@@ -95,18 +93,22 @@ function edgeTest() {
 	if (snake[0].x > cnvs.width) {
 		clearInterval(game);
 		clearInterval(food);
+		paused = true;
 		alert('Game Over!');
 	} else if (snake[0].x < -10) {
 		clearInterval(game);
 		clearInterval(food);
+		paused = true;
 		alert('Game Over!');
 	} else if (snake[0].y == 0) {
 		clearInterval(game);
 		clearInterval(food);
+		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].y > cnvs.height - 10) {
+	} else if (snake[0].y > cnvs.height) {
 		clearInterval(game);
 		clearInterval(food);
+		paused = true;
 		alert('Game Over!');
 	}
 }
@@ -126,13 +128,13 @@ function generateRandomfood() {}
 // creating the grid
 function drawBoard() {
 	for (var x = 0; x <= bw; x += 10) {
-		ctx.moveTo(0.2 + x + p, p);
-		ctx.lineTo(0.2 + x + p, bh + p);
+		ctx.moveTo(x);
+		ctx.lineTo(x, bh);
 	}
 
 	for (var x = 0; x <= bh; x += 10) {
-		ctx.moveTo(p, 0.2 + x + p);
-		ctx.lineTo(bw + p, 0.2 + x + p);
+		ctx.moveTo(x);
+		ctx.lineTo(bw, x);
 	}
 	ctx.strokeStyle = '#FFFFFF';
 	ctx.stroke();
