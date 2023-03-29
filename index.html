@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Snake game</title>
-</head>
-<body>
-    <!-- TITLE CARD -->
-<div id="header-card">
-        <h1>Snake game</h1>
-        <h6>Score: <span id="score">0</span></h6>
-</div>
-    <!-- TITLE CARD -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Compiled and minified CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Snake game</title>
+	</head>
+	<body>
+		<!-- TITLE CARD -->
+		<div id="header-card">
+			<h1>Snake game</h1>
+			<h6>Score: <span id="score">0</span></h6>
+		</div>
+		<!-- TITLE CARD -->
 
-    <!-- GAME BOARD -->
-<canvas id="gameBoard" width="400" height="400">
+		<!-- GAME BOARD -->
+		<canvas id="gameBoard" width="400" height="400"> </canvas>
+		<!-- GAME BOARD -->
 
+		<!-- GAME CONTROLS-->
+		<div id="controls">
+			<a class="waves-effect waves-light btn-small" id="start">New game</a>
+			<a class="waves-effect waves-light btn-small" id="restart">Restart</a>
+			<a class="waves-effect waves-light btn-small" id="pause">Pause</a>
+			<a class="waves-effect waves-light btn-small" id="resume">Resume</a>
+		</div>
+		<!-- GAME CONTROLS-->
+	</body>
 
-</canvas>
-    <!-- GAME BOARD -->
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="game.js"></script>
 
-    <!-- GAME CONTROLS-->
-    <div id="controls">
-        <a class="waves-effect waves-light btn-small" id="start">New game</a>
-        <a class="waves-effect waves-light btn-small" id="restart">Restart</a>
-        <a class="waves-effect waves-light btn-small" id="pause">Pause</a>
-        <a class="waves-effect waves-light btn-small" id="resume">Resume</a>
-    </div>    
-    <!-- GAME CONTROLS-->
-    
-</body>
-
-
-
-
-<!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="game.js"></script>
-
-<footer class="page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Snake game</h5>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      © 2021 Snake Game
-      </div>
-    </div>
-  </footer>
-
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">Snake game</h5>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">© 2021 Snake Game</div>
+		</div>
+	</footer>
 </html>
