@@ -2,6 +2,7 @@
 // The edge collision testing does not working -> the y top collision happens much earlier
 // The snake can turn on itself
 // Food can be generated on the snake itself
+// Restarting the game is not implemented
 
 // variable setup for the game board
 let cnvs = document.querySelector('#gameBoard');
