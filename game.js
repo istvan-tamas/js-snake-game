@@ -1,3 +1,8 @@
+// bugfixes needed TODO
+// The edge collision testing does not working -> the y top collision happens much earlier
+// The snake can turn on itself
+// Food can be generated on the snake itself
+
 // variable setup for the game board
 let cnvs = document.querySelector('#gameBoard');
 let ctx = cnvs.getContext('2d');
@@ -22,7 +27,7 @@ let food = true;
 let foodX;
 let foodY;
 
-// snake startpoint set-up
+// snake startpoint setup
 let snake = [
 	{ x: startX, y: startY },
 	{ x: startX - 10, y: startY },
@@ -63,7 +68,7 @@ function changeSnake() {
 
 // after setting up the initial coordinates drawing the snake in the middle of the board
 function drawSnakePart(snakePart) {
-	ctx.fillStyle = '#112A46';
+	ctx.fillStyle = '#192A46';
 	ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
 	ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
@@ -90,12 +95,12 @@ function changeDirection(e) {
 
 // collision testing
 function edgeTest() {
-	if (snake[0].x > cnvs.width) {
+	if (snake[0].x == cnvs.width) {
 		clearInterval(game);
 		clearInterval(food);
 		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].x < -10) {
+	} else if (snake[0].x == 0) {
 		clearInterval(game);
 		clearInterval(food);
 		paused = true;
@@ -105,7 +110,7 @@ function edgeTest() {
 		clearInterval(food);
 		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].y > cnvs.height) {
+	} else if (snake[0].y == cnvs.height) {
 		clearInterval(game);
 		clearInterval(food);
 		paused = true;
@@ -150,8 +155,8 @@ let paused = false;
 function startGame() {
 	game = setInterval(function game() {
 		if (!paused) {
-			edgeTest();
 			drawSnake();
+			edgeTest();
 			changeSnake();
 			drawBoard();
 		}
