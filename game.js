@@ -11,8 +11,23 @@ let ctx = cnvs.getContext('2d');
 let scoreHandle = document.querySelector('#score');
 let score = 0;
 
+// creating the game grid
 let bw = 400;
 let bh = 400;
+
+function drawBoard() {
+	for (let x = 0; x <= bw; x += 10) {
+		ctx.moveTo(x);
+		ctx.lineTo(x, bh);
+	}
+
+	for (let x = 0; x <= bh; x += 10) {
+		ctx.moveTo(x);
+		ctx.lineTo(bw, x);
+	}
+	ctx.strokeStyle = '#FFFFFF';
+	ctx.stroke();
+}
 
 // player setup
 let startX = cnvs.width / 2;
@@ -128,21 +143,6 @@ function getRandomInt(min, max) {
 // generating food
 
 function generateRandomfood() {}
-
-// creating the grid
-function drawBoard() {
-	for (var x = 0; x <= bw; x += 10) {
-		ctx.moveTo(x);
-		ctx.lineTo(x, bh);
-	}
-
-	for (var x = 0; x <= bh; x += 10) {
-		ctx.moveTo(x);
-		ctx.lineTo(bw, x);
-	}
-	ctx.strokeStyle = '#FFFFFF';
-	ctx.stroke();
-}
 
 // Event listeners for the buttons
 document.querySelector('#start').addEventListener('click', startGame);
