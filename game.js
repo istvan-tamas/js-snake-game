@@ -11,19 +11,17 @@ let ctx = cnvs.getContext('2d');
 let scoreHandle = document.querySelector('#score');
 let score = 0;
 
-// Box width
 let bw = 400;
-// Box height
 let bh = 400;
 
-//starting transformations
-let dx = 10;
-let dy = 0;
-
-// starting point for the player
+// player setup
 let startX = cnvs.width / 2;
 let startY = cnvs.height / 2;
 
+let dx = 10;
+let dy = 0;
+
+// food setup
 let food = true;
 let foodX;
 let foodY;
