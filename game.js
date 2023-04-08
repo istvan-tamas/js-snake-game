@@ -11,10 +11,6 @@ let ctx = cnvs.getContext('2d');
 let scoreHandle = document.querySelector('#score');
 let score = 0;
 
-console.log(cnvs.height);
-
-console.log(cnvs.width);
-
 // snake setup
 let startX = ctx.canvas.width / 2;
 let startY = ctx.canvas.height / 2;
@@ -42,18 +38,54 @@ function drawSnakePart(snakePart) {
 	ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-drawSnake(snake);
+function changeSnake(snake) {
+	const head = {
+		x: snake[0].x + dx,
+		y: snake[0].y + dy,
+	};
+	snake.unshift(head);
+	snake.pop();
+}
+
+function changeDirection(e) {
+	e.preventDefault();
+	if (e.key === 'ArrowUp') {
+		dy = -10;
+		dx = 0;
+	} else if (e.key === 'ArrowDown') {
+		dy = 10;
+		dx = 0;
+	} else if (e.key === 'ArrowRight') {
+		dy = 0;
+		dx = 10;
+	} else if (e.key === 'ArrowLeft') {
+		dy = 0;
+		dx = -10;
+	}
+}
+
+// game init
+let paused = true;
+
+function startGame(snake) {
+	if (!paused) {
+		game = setInterval(function game() {
+			changeSnake(snake);
+			drawSnake(snake);
+		}, 350);
+	}
+}
 
 // game controls
-document.querySelector('#start').addEventListener('click', startGame);
+document.querySelector('#start').addEventListener('click', newGame);
 document.querySelector('#restart').addEventListener('click', restartGame);
 document.querySelector('#pause').addEventListener('click', pauseGame);
 document.querySelector('#resume').addEventListener('click', resumeGame);
+document.addEventListener('keydown', changeDirection);
 
-let paused = true;
-
-function startGame() {
+function newGame() {
 	paused = false;
+	startGame(snake);
 }
 
 function restartGame() {
