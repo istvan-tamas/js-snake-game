@@ -11,9 +11,9 @@ let ctx = cnvs.getContext('2d');
 let scoreHandle = document.querySelector('#score');
 let score = 0;
 
-console.log(ctx.canvas.height);
+console.log(cnvs.height);
 
-console.log(ctx.canvas.width);
+console.log(cnvs.width);
 
 // snake setup
 let startX = ctx.canvas.width / 2;
@@ -30,6 +30,19 @@ let snake = [
 	{ x: startX - 20, y: startY },
 	{ x: startX - 30, y: startY },
 ];
+
+function drawSnake(snake) {
+	ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+	snake.forEach(drawSnakePart);
+}
+
+function drawSnakePart(snakePart) {
+	ctx.fillStyle = '#A020F0';
+	ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+	ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+}
+
+drawSnake(snake);
 
 // game controls
 document.querySelector('#start').addEventListener('click', startGame);
