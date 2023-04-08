@@ -19,6 +19,9 @@ let startY = ctx.canvas.height / 2;
 let dx = 10;
 let dy = 0;
 
+// initial difficulty
+let speed = 350;
+
 // snake startpoint setup
 let snake = [
 	{ x: startX, y: startY },
@@ -47,6 +50,7 @@ function changeSnake(snake) {
 	snake.pop();
 }
 
+// snake controls
 function changeDirection(e) {
 	e.preventDefault();
 	if (e.key === 'ArrowUp' && !paused && dy != 10) {
@@ -64,6 +68,27 @@ function changeDirection(e) {
 	}
 }
 
+// collision testing
+function edgeTest(snake) {
+	if (snake[0].x > 390) {
+		clearInterval(game);
+		paused = true;
+		alert('Game Over!');
+	} else if (snake[0].x < -10) {
+		clearInterval(game);
+		paused = true;
+		alert('Game Over!');
+	} else if (snake[0].y < -10) {
+		clearInterval(game);
+		paused = true;
+		alert('Game Over!');
+	} else if (snake[0].y > 400) {
+		clearInterval(game);
+		paused = true;
+		alert('Game Over!');
+	}
+}
+
 // game init
 let paused = true;
 
@@ -72,8 +97,10 @@ function startGame(snake) {
 		if (!paused) {
 			changeSnake(snake);
 			drawSnake(snake);
+			edgeTest(snake);
+			console.log(snake[0].y);
 		}
-	}, 350);
+	}, speed);
 }
 
 // game controls
