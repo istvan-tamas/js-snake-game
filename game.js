@@ -15,6 +15,22 @@ console.log(ctx.canvas.height);
 
 console.log(ctx.canvas.width);
 
+// snake setup
+let startX = ctx.canvas.width / 2;
+let startY = ctx.canvas.height / 2;
+
+// movement starts to the right
+let dx = 10;
+let dy = 0;
+
+// snake startpoint setup
+let snake = [
+	{ x: startX, y: startY },
+	{ x: startX - 10, y: startY },
+	{ x: startX - 20, y: startY },
+	{ x: startX - 30, y: startY },
+];
+
 // game controls
 document.querySelector('#start').addEventListener('click', startGame);
 document.querySelector('#restart').addEventListener('click', restartGame);
