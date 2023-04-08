@@ -25,7 +25,6 @@ function drawBoard() {
 		ctx.moveTo(x);
 		ctx.lineTo(bw, x);
 	}
-	ctx.strokeStyle = '#FFFFFF';
 	ctx.stroke();
 }
 
@@ -33,13 +32,9 @@ function drawBoard() {
 let startX = cnvs.width / 2;
 let startY = cnvs.height / 2;
 
+// movement starts to the right
 let dx = 10;
 let dy = 0;
-
-// food setup
-let food = true;
-let foodX;
-let foodY;
 
 // snake startpoint setup
 let snake = [
@@ -48,6 +43,11 @@ let snake = [
 	{ x: startX - 20, y: startY },
 	{ x: startX - 30, y: startY },
 ];
+
+// food setup
+let food = true;
+let foodX;
+let foodY;
 
 function drawSnake() {
 	ctx.clearRect(0, 0, cnvs.width, cnvs.height);
