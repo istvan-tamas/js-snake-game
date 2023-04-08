@@ -92,15 +92,39 @@ function edgeTest(snake) {
 // game init
 let paused = true;
 
+// food setup
+let food = true;
+let foodX;
+let foodY;
+
 function startGame(snake) {
 	game = setInterval(function game() {
 		if (!paused) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
-			console.log(snake[0].y);
 		}
 	}, speed);
+}
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+// draw food
+function drawFood() {
+	if (food) {
+		foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
+		foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
+		food = false;
+	}
+	ctx.fillStyle = 'red';
+	ctx.beginPath();
+	ctx.fillRect(foodX, foodY, 10, 10);
+	ctx.strokeRect(foodX, foodY, 10, 10);
+	ctx.stroke();
 }
 
 // game controls
@@ -116,7 +140,17 @@ function newGame() {
 }
 
 function restartGame() {
+	clearInterval(game);
+	snake = [
+		{ x: startX, y: startY },
+		{ x: startX - 10, y: startY },
+		{ x: startX - 20, y: startY },
+		{ x: startX - 30, y: startY },
+	];
+	dx = 10;
+	dy = 0;
 	paused = false;
+	startGame(snake);
 }
 
 function pauseGame() {
@@ -126,3 +160,5 @@ function pauseGame() {
 function resumeGame() {
 	paused = false;
 }
+
+drawFood();
