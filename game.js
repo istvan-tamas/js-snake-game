@@ -49,16 +49,16 @@ function changeSnake(snake) {
 
 function changeDirection(e) {
 	e.preventDefault();
-	if (e.key === 'ArrowUp') {
+	if (e.key === 'ArrowUp' && !paused) {
 		dy = -10;
 		dx = 0;
-	} else if (e.key === 'ArrowDown') {
+	} else if (e.key === 'ArrowDown' && !paused) {
 		dy = 10;
 		dx = 0;
-	} else if (e.key === 'ArrowRight') {
+	} else if (e.key === 'ArrowRight' && !paused) {
 		dy = 0;
 		dx = 10;
-	} else if (e.key === 'ArrowLeft') {
+	} else if (e.key === 'ArrowLeft' && !paused) {
 		dy = 0;
 		dx = -10;
 	}
@@ -68,12 +68,12 @@ function changeDirection(e) {
 let paused = true;
 
 function startGame(snake) {
-	if (!paused) {
-		game = setInterval(function game() {
+	game = setInterval(function game() {
+		if (!paused) {
 			changeSnake(snake);
 			drawSnake(snake);
-		}, 350);
-	}
+		}
+	}, 350);
 }
 
 // game controls
