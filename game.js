@@ -26,9 +26,7 @@ function drawBoard() {
 		ctx.lineTo(bw, x);
 	}
 	ctx.stroke();
-}
-
-// player setup
+} // player setup
 let startX = cnvs.width / 2;
 let startY = cnvs.height / 2;
 
@@ -158,13 +156,11 @@ function startGame() {
 			edgeTest();
 			changeSnake();
 			drawBoard();
+			food = setInterval(function food() {
+				drawFood();
+			}, 1000);
 		}
 	}, 100);
-	if (!paused) {
-		food = setInterval(function food() {
-			drawFood();
-		}, 1000);
-	}
 }
 
 // pausing the game
@@ -178,5 +174,3 @@ function resumeGame() {
 	paused = false;
 	console.log('paused');
 }
-
-drawBoard();
