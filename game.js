@@ -49,16 +49,16 @@ function changeSnake(snake) {
 
 function changeDirection(e) {
 	e.preventDefault();
-	if (e.key === 'ArrowUp' && !paused) {
+	if (e.key === 'ArrowUp' && !paused && dy != 10) {
 		dy = -10;
 		dx = 0;
-	} else if (e.key === 'ArrowDown' && !paused) {
+	} else if (e.key === 'ArrowDown' && !paused && dy != -10) {
 		dy = 10;
 		dx = 0;
-	} else if (e.key === 'ArrowRight' && !paused) {
+	} else if (e.key === 'ArrowRight' && !paused && dx != -10) {
 		dy = 0;
 		dx = 10;
-	} else if (e.key === 'ArrowLeft' && !paused) {
+	} else if (e.key === 'ArrowLeft' && !paused && dx != 10) {
 		dy = 0;
 		dx = -10;
 	}
