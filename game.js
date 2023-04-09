@@ -93,16 +93,20 @@ function edgeTest(snake) {
 let paused = true;
 
 // food setup
-let food = true;
+let food = false;
 let foodX;
 let foodY;
 
 function startGame(snake) {
+	food = true;
 	game = setInterval(function game() {
 		if (!paused) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
+			if (food) {
+				drawFood();
+			}
 		}
 	}, speed);
 }
