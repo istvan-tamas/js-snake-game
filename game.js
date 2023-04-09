@@ -115,16 +115,14 @@ function getRandomInt(min, max) {
 
 // draw food
 function drawFood() {
-	if (food) {
-		foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
-		foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
-		food = false;
-	}
+	foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
+	foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
 	ctx.fillStyle = 'red';
 	ctx.beginPath();
 	ctx.fillRect(foodX, foodY, 10, 10);
 	ctx.strokeRect(foodX, foodY, 10, 10);
 	ctx.stroke();
+	food = false;
 }
 
 // game controls
