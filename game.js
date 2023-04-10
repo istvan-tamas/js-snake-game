@@ -103,9 +103,9 @@ function startGame(snake) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
-			food = setInterval(function food() {
+			gen_food = setInterval(function gen_food() {
 				drawFood();
-			}, 1000);
+			}, 500);
 		}
 	}, speed);
 }
@@ -127,7 +127,6 @@ function drawFood() {
 	ctx.fillRect(foodX, foodY, 10, 10);
 	ctx.strokeRect(foodX, foodY, 10, 10);
 	ctx.stroke();
-	food = false;
 }
 
 // game controls
@@ -163,5 +162,3 @@ function pauseGame() {
 function resumeGame() {
 	paused = false;
 }
-
-drawFood();
