@@ -93,20 +93,19 @@ function edgeTest(snake) {
 let paused = true;
 
 // food setup
-let food = false;
+let food = true;
 let foodX;
 let foodY;
 
 function startGame(snake) {
-	food = true;
 	game = setInterval(function game() {
 		if (!paused) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
-			if (food) {
+			food = setInterval(function food() {
 				drawFood();
-			}
+			}, 1000);
 		}
 	}, speed);
 }
@@ -119,9 +118,11 @@ function getRandomInt(min, max) {
 
 // draw food
 function drawFood() {
-	foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
-	foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
-	ctx.fillStyle = 'red';
+	if (food) {
+		foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
+		foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
+		food = false;
+	}
 	ctx.beginPath();
 	ctx.fillRect(foodX, foodY, 10, 10);
 	ctx.strokeRect(foodX, foodY, 10, 10);
