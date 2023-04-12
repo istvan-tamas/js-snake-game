@@ -88,7 +88,7 @@ function edgeTest(snake) {
 
 // checking for self collision
 
-function selfTest() {
+function selfTest(snake) {
 	return null;
 }
 
