@@ -67,23 +67,29 @@ function changeDirection(e) {
 
 // collision testing
 function edgeTest(snake) {
-	if (snake[0].x > 390) {
+	if (snake[0].x >= 400) {
 		clearInterval(game);
 		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].x < -10) {
+	} else if (snake[0].x < 0) {
 		clearInterval(game);
 		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].y < -10) {
+	} else if (snake[0].y < 0) {
 		clearInterval(game);
 		paused = true;
 		alert('Game Over!');
-	} else if (snake[0].y > 400) {
+	} else if (snake[0].y >= 400) {
 		clearInterval(game);
 		paused = true;
 		alert('Game Over!');
 	}
+}
+
+// checking for self collision
+
+function selfTest() {
+	return null;
 }
 
 function foodTest(snake) {
@@ -113,6 +119,7 @@ function startGame(snake) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
+			selfTest(snake);
 			foodTest(snake);
 			drawFood();
 		}
@@ -148,6 +155,8 @@ document.addEventListener('keydown', changeDirection);
 function newGame() {
 	paused = false;
 	startGame(snake);
+	document.querySelector('#start').removeAttribute('class');
+	document.querySelector('#start').setAttribute('class', 'btn disabled');
 }
 
 function restartGame() {
