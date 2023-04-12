@@ -89,6 +89,19 @@ function edgeTest(snake) {
 	}
 }
 
+function foodTest(snake) {
+	if (snake[0].x == foodX && snake[0].y == foodY) {
+		const tail = {
+			x: snake[0].x + dx,
+			y: snake[0].y + dy,
+		};
+		snake.push(tail);
+		score++;
+		food = true;
+		scoreHandle.innerHTML = score;
+	}
+}
+
 // game init
 let paused = true;
 
@@ -103,6 +116,7 @@ function startGame(snake) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
+			foodTest(snake);
 			drawFood();
 		}
 	}, speed);
