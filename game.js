@@ -103,9 +103,7 @@ function startGame(snake) {
 			changeSnake(snake);
 			drawSnake(snake);
 			edgeTest(snake);
-			gen_food = setInterval(function gen_food() {
-				drawFood();
-			}, 500);
+			drawFood();
 		}
 	}, speed);
 }
@@ -121,12 +119,12 @@ function drawFood() {
 	if (food) {
 		foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
 		foodY = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
-		food = false;
 	}
 	ctx.beginPath();
 	ctx.fillRect(foodX, foodY, 10, 10);
 	ctx.strokeRect(foodX, foodY, 10, 10);
 	ctx.stroke();
+	food = false;
 }
 
 // game controls
