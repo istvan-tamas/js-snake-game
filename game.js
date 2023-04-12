@@ -19,9 +19,6 @@ let startY = ctx.canvas.height / 2;
 let dx = 10;
 let dy = 0;
 
-// initial difficulty
-let speed = 350;
-
 // snake startpoint setup
 let snake = [
 	{ x: startX, y: startY },
@@ -119,7 +116,7 @@ function startGame(snake) {
 			foodTest(snake);
 			drawFood();
 		}
-	}, speed);
+	}, 120);
 }
 
 function getRandomInt(min, max) {
@@ -163,6 +160,9 @@ function restartGame() {
 	];
 	dx = 10;
 	dy = 0;
+	score = 0;
+	food = true;
+	scoreHandle.innerHTML = score;
 	paused = false;
 	startGame(snake);
 }
