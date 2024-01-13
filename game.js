@@ -1,25 +1,19 @@
 // bugfixes needed TODO
-// The edge collision testing does not working -> the y top collision happens much earlier
 // The snake can turn on itself
 // Food can be generated on the snake itself
-// Restarting the game is not implemented
 
-// game board setup
 let cnvs = document.querySelector('#gameBoard');
 let ctx = cnvs.getContext('2d');
 
 let scoreHandle = document.querySelector('#score');
 let score = 0;
 
-// snake setup
 let startX = ctx.canvas.width / 2;
 let startY = ctx.canvas.height / 2;
 
-// movement starts to the right
 let dx = 10;
 let dy = 0;
 
-// snake startpoint setup
 let snake = [
 	{ x: startX, y: startY },
 	{ x: startX - 10, y: startY },
@@ -47,7 +41,6 @@ function changeSnake(snake) {
 	snake.pop();
 }
 
-// snake controls
 function changeDirection(e) {
 	e.preventDefault();
 	if (e.key === 'ArrowUp' && !paused && dy != 10) {
@@ -89,7 +82,13 @@ function edgeTest(snake) {
 // checking for self collision
 
 function selfTest(snake) {
-	return null;
+	for (let i = 1; i <= snake.length; i++) {
+		if (snake[0].x == snake[i].x) {
+			clearInterval(game);
+			paused = true;
+			alert('Game Over!');
+		}
+	}
 }
 
 function foodTest(snake) {
@@ -105,10 +104,8 @@ function foodTest(snake) {
 	}
 }
 
-// game init
 let paused = true;
 
-// food setup
 let food = true;
 let foodX;
 let foodY;
@@ -132,7 +129,6 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-// draw food
 function drawFood() {
 	if (food) {
 		foodX = getRandomInt(1, 4) * getRandomInt(1, 10) * 10 - 10;
@@ -145,7 +141,6 @@ function drawFood() {
 	food = false;
 }
 
-// game controls
 document.querySelector('#start').addEventListener('click', newGame);
 document.querySelector('#restart').addEventListener('click', restartGame);
 document.querySelector('#pause').addEventListener('click', pauseGame);
