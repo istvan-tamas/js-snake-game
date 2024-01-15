@@ -1,11 +1,27 @@
-# js-snake-game
+# JavaScript snake game
 
-Snake game built with JavaScript and HTML5 canvas.
+Snake game in your browser!
 
-## Installation
+## Description
 
-open index.html and play in the browser
+A very simple snake game in your browser written in JS and using materialize CSS for looks and feel.
 
-###
+The rules are simple:
 
-enjoy
+- Collect food in order to grow, but beware colliding with walls or with yourself!
+
+## Getting Started
+
+### Dependencies
+
+A modern web browser that supports HTML5 canvas.
+
+### Installing
+
+- clone the repo, then open index.html in your browser
+
+### Executing program
+
+```
+google-chrome ./index.html
+```
