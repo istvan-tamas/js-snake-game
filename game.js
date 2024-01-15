@@ -1,7 +1,3 @@
-// bugfixes needed TODO
-// The snake can turn on itself
-// Food can be generated on the snake itself
-
 let cnvs = document.querySelector('#gameBoard');
 let ctx = cnvs.getContext('2d');
 
@@ -79,11 +75,9 @@ function edgeTest(snake) {
 	}
 }
 
-// checking for self collision
-
 function selfTest(snake) {
-	for (let i = 1; i <= snake.length; i++) {
-		if (snake[0].x == snake[i].x) {
+	for (let i = 1; i < snake.length; i++) {
+		if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
 			clearInterval(game);
 			paused = true;
 			alert('Game Over!');
